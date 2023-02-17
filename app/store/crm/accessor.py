@@ -1,6 +1,6 @@
-from typing import Optional
 import typing
 import uuid
+from typing import Optional
 
 from app.crm.models import User
 

@@ -4,7 +4,12 @@ from aiohttp.web_exceptions import HTTPNotFound
 from aiohttp_apispec import docs, querystring_schema, request_schema, response_schema
 
 from app.crm.models import User
-from app.crm.schemes import ListUsersResponseSchema, UserAddSchema, UserGetRequestSchema, UserGetResponseSchema
+from app.crm.schemes import (
+    ListUsersResponseSchema,
+    UserAddSchema,
+    UserGetRequestSchema,
+    UserGetResponseSchema,
+)
 from app.web.app import View
 from app.web.schemes import OkResponseSchema
 from app.web.utils import json_response
@@ -38,6 +43,7 @@ class GetUserView(View):
         user_id = self.request.query["id"]
         user = await self.request.app.crm_accessor.get_user(uuid.UUID(user_id))
         if user:
-            return json_response(data={"user": {"email": user.email, "id": str(user.id_)}})
+            return json_response(
+                data={"user": {"email": user.email, "id": str(user.id_)}}
+            )
         raise HTTPNotFound
-        
